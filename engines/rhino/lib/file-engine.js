@@ -147,7 +147,9 @@ exports.chown = function (path, owner, group) {
 };
 
 exports.link = function (source, target) {
-    os.command(['ln', source, target]);
+    if (/\bwindows\b/i.test(system.os))
+    	os.command(['copy', target, source]);
+    else os.command(['ln', source, target]);
 };
 
 exports.symlink = function (source, target) {
@@ -157,7 +159,9 @@ exports.symlink = function (source, target) {
     // on ServerJS
     if (exports.isRelative(source))
         source = exports.relative(target, source);
-    os.command(['ln', '-s', source, target]);
+    if (/\bwindows\b/i.test(system.os))
+    	os.command(['copy', target, source]);
+    else os.command(['ln', '-s', source, target]);
 };
 
 exports.rename = function (source, target) {

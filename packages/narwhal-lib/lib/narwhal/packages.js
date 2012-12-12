@@ -215,7 +215,12 @@ exports.read = function read(prefixes, catalog, usingCatalog, options) {
                 // if a dependency is referring to a 'using' package ID we add the
                 // package being referenced to the system package catalog
                 if(packageDatum.dependencies) {
-                    packageDatum.dependencies.forEach(function(dependency) {
+                	let deps = packageDatum.dependencies;
+                	if (deps.constructor !== Array) {
+                		// Cannot handle dependencies with version, just use the keys here.
+                		deps = Object.keys(deps);
+            		}
+                    deps.forEach(function(dependency) {
                         if(Object.prototype.hasOwnProperty.call(usingCatalog, dependency) &&
                            !Object.prototype.hasOwnProperty.call(catalog, dependency)) {
 

@@ -2235,15 +2235,15 @@
                 "2",
                 "6"
             ],
-            "descriptorUrl": "http://github.com/tlrobinson/coffee-script/raw/master/package.json",
-            "packageUrl": "http://github.com/tlrobinson/coffee-script/zipball/master",
+            "descriptorUrl": "https://github.com/alagopus/coffee-script/raw/master/package.json",
+            "packageUrl": "https://github.com/alagopus/coffee-script/archive/master.zip",
             "packageArchive": "zip",
             "source": {
                 "type": "github",
                 "user": "tlrobinson",
                 "packageName": "coffee-script",
-                "descriptorUrl": "http://github.com/tlrobinson/coffee-script/raw/master/package.json",
-                "url": "http://github.com/tlrobinson/coffee-script/zipball/master",
+                "descriptorUrl": "https://github.com/alagopus/coffee-script/raw/master/package.json",
+                "url": "https://github.com/alagopus/coffee-script/archive/master.zip",
                 "archive": "zip"
             },
             "contributors": [

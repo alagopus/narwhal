@@ -11,7 +11,7 @@ var PACKAGES = require("narwhal/packages");
 var stream = require("narwhal/term").stream;
 
 exports.defaultSources = {"includes": [
-    "http://github.com/280north/narwhal/raw/master/catalog-2.json"
+    "https://raw.github.com/alagopus/narwhal/master/catalog-2.json"
 ]};
 
 /**

@@ -25,7 +25,8 @@
         "Kris Zyp (http://www.sitepen.com/blog/author/kzyp/)",
         "Nathan Stott (http://nathan.whiteboard-it.com) <nathan.stott@whiteboard-it.com>",
         "Toby Ho (http://tobyho.com) <airportyh@gmail.com>",
-        "Abhinav Gupta"
+        "Abhinav Gupta",
+        "Klaus Rennecke <a.lagopus@gmail.com>"
     ],
     "dependencies": [
         "narwhal-lib"

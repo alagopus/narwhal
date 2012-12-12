@@ -146,9 +146,23 @@ exports.chown = function (path, owner, group) {
     os.command(['chown', owner, path]);
 };
 
+copyForLink = function (source, target) {
+    var sourceStream = exports.FileIO(source, {read:true});
+    try {
+        var targetStream = exports.FileIO(target, {write:true});
+        try {
+            sourceStream.copy(targetStream);
+        } finally {
+            targetStream.close();
+        }
+    } finally {
+        sourceStream.close();
+    }
+};
+
 exports.link = function (source, target) {
     if (/\bwindows\b/i.test(system.os))
-    	os.command(['copy', target, source]);
+    	copyForLink(source, target);
     else os.command(['ln', source, target]);
 };
 
@@ -160,7 +174,7 @@ exports.symlink = function (source, target) {
     if (exports.isRelative(source))
         source = exports.relative(target, source);
     if (/\bwindows\b/i.test(system.os))
-    	os.command(['copy', target, source]);
+    	copyForLink(source, target);
     else os.command(['ln', '-s', source, target]);
 };
 

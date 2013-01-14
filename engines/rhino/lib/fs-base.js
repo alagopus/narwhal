@@ -513,6 +513,8 @@ exports.changeWorkingDirectory = function (path) {
     var error = getCLib().getFunction("chdir").invokeInt([path]);
     if (error)
         throw new Error("Could not change working directory: " + path);
+    else
+        Packages.java.lang.System.setProperty("user.dir", exports.workingDirectory());
 };
 
 /*spec

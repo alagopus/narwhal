@@ -119,7 +119,7 @@ exports.Loader = function (options) {
 exports.resolve = function (id, baseId) {
     id = String(id);
     if (id.charAt(0) == ".") {
-        id = file.dirname(baseId) + "/" + id;
+        id = (baseId ? file.dirname(baseId) : file.cwd()) + "/" + id;
     }
     // module ids need to use forward slashes, despite what the OS might say
     return file.normal(id).replace(/\\/g, '/');

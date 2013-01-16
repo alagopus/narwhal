@@ -19,7 +19,7 @@ if [ -z "$NARWHAL_HOME" ]; then
 	export NARWHAL_HOME=$(dirname -- "$(dirname -- "$NARWHAL_ENGINE_HOME")")
 fi
 
-CLASSPATH=$NARWHAL_ENGINE_HOME/jars/jna.jar
+CLASSPATH=$NARWHAL_ENGINE_HOME/jars/jna-3.5.1.jar:$NARWHAL_ENGINE_HOME/jars/platform-3.5.1.jar
 BOOTCLASSPATH=$NARWHAL_ENGINE_HOME/jars/js.jar
 
 JAVA_OPTS="-Dnarwhal.http_proxy=$http_proxy -Djava.awt.headless=true"

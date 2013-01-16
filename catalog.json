@@ -1088,7 +1088,7 @@
             "version": "0.1.2",
             "githubName": "coffee-script",
             "type": "zip",
-            "location": "http://github.com/tlrobinson/coffee-script/zipball/master"
+            "location": "https://github.com/alagopus/coffee-script/archive/master.zip"
         },
         "parenscript": {
             "name": "parenscript",

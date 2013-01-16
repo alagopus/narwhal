@@ -54,6 +54,10 @@ assert.AssertionError = function (options) {
 
 };
 
+// assert.AssertionError instanceof Error
+
+assert.AssertionError.prototype = Object.create(Error.prototype);
+
 // XXX extension
 // Ash Berlin
 assert.AssertionError.prototype.toString = function (){
@@ -77,10 +81,6 @@ assert.AssertionError.prototype.toString = function (){
 assert.AssertionError.prototype.toSource = function () {
     return "new (require('assert').AssertionError)(" + Object.prototype.toSource.call(this) + ")";
 };
-
-// assert.AssertionError instanceof Error
-
-assert.AssertionError.prototype = Object.create(Error.prototype);
 
 // At present only the three keys mentioned above are used and
 // understood by the spec. Implementations or sub modules can pass

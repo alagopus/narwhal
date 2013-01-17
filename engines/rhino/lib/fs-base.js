@@ -476,14 +476,7 @@ with a toString method)
  **/
 
 exports.workingDirectory = function () {
-    var jna = Packages.com.sun.jna;
-    var cwd = getCLib().getFunction("getcwd");
-    var size = 4097;
-    var memory = jna.Memory(size);
-    var pointer = cwd.invokeInt([memory, size]);
-    if (!pointer)
-        throw new Error("Could not get working directory: getcwd");
-    return memory.getString(0, false);
+    return Packages.java.lang.System.getProperty("user.dir");
 };
 
 /*spec
@@ -513,8 +506,20 @@ exports.changeWorkingDirectory = function (path) {
     var error = getCLib().getFunction("chdir").invokeInt([path]);
     if (error)
         throw new Error("Could not change working directory: " + path);
-    else
-        Packages.java.lang.System.setProperty("user.dir", exports.workingDirectory());
+
+    // Update "user.dir" system property
+    var System = Packages.java.lang.System;
+    var jna = Packages.com.sun.jna;
+    var cwd = getCLib().getFunction("getcwd");
+    var size = 4097;
+    var memory = jna.Memory(size);
+    if (cwd.invokeInt([memory, size]))
+        return Packages.java.lang.System.setProperty("user.dir", memory.getString(0, false));
+
+    // Try to bail out by guessing the result
+    var dir = BOOTSTRAP.resolve(System.getProperty("user.dir"), path);
+    System.setProperty("user.dir", exports.canonical(dir));
+    throw new Error("Could not get working directory: cwd '" + path + "'");
 };
 
 /*spec

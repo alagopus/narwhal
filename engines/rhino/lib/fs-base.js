@@ -179,7 +179,14 @@ exports.Permissions.prototype.toUnix = function () {
 };
 
 exports.Permissions['default'] = new exports.Permissions(
-    ~parseInt(getCLib().getFunction("umask").invokeInt([]), 8) & 0777
+    (function(){
+        //FIXME umask seems to behave erratically
+        //var umask = getCLib().getFunction("umask");
+        //var cmask = umask.invokeInt([0]);
+        //umask.invokeInt([cmask]); // restore
+        var cmask = 022; // Use fixed fall-back
+        return ~cmask & 0777;
+    })()
 );
 
 /*spec
@@ -511,15 +518,16 @@ exports.changeWorkingDirectory = function (path) {
     var System = Packages.java.lang.System;
     var jna = Packages.com.sun.jna;
     var cwd = getCLib().getFunction("getcwd");
-    var size = 4097;
-    var memory = jna.Memory(size);
-    if (cwd.invokeInt([memory, size]))
-        return Packages.java.lang.System.setProperty("user.dir", memory.getString(0, false));
-
-    // Try to bail out by guessing the result
-    var dir = BOOTSTRAP.resolve(System.getProperty("user.dir"), path);
-    System.setProperty("user.dir", exports.canonical(dir));
-    throw new Error("Could not get working directory: cwd '" + path + "'");
+    var dir, pointer = cwd.invokePointer([jna.Pointer.NULL, 0]);
+    if (pointer && pointer != jna.Pointer.NULL) {
+        dir = pointer.getString(0, false);
+    } else {
+        // Try to bail out by guessing the result
+        dir = BOOTSTRAP.resolve(System.getProperty("user.dir"), path);
+        dir = exports.canonical(dir); // Prevent accumulating path traversals
+        system.stderr.print("getcwd failed: " + dir);
+    }
+    System.setProperty("user.dir", dir);
 };
 
 /*spec

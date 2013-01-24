@@ -2235,14 +2235,14 @@
                 "2",
                 "6"
             ],
-            "descriptorUrl": "https://github.com/alagopus/coffee-script/raw/master/package.json",
-            "packageUrl": "https://github.com/alagopus/coffee-script/archive/master.zip",
+            "descriptorUrl": "https://raw.github.com/alagopus/coffee-script/narwhal/package.json",
+            "packageUrl": "https://github.com/alagopus/coffee-script/archive/narwhal.zip",
             "packageArchive": "zip",
             "source": {
                 "type": "github",
                 "user": "tlrobinson",
                 "packageName": "coffee-script",
-                "descriptorUrl": "https://github.com/alagopus/coffee-script/raw/master/package.json",
+                "descriptorUrl": "https://raw.github.com/alagopus/coffee-script/narwhal/package.json",
                 "url": "https://github.com/alagopus/coffee-script/archive/master.zip",
                 "archive": "zip"
             },

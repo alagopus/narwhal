@@ -1088,7 +1088,7 @@
             "version": "0.1.2",
             "githubName": "coffee-script",
             "type": "zip",
-            "location": "https://github.com/alagopus/coffee-script/archive/master.zip"
+            "location": "https://github.com/alagopus/coffee-script/archive/narwhal.zip"
         },
         "parenscript": {
             "name": "parenscript",
